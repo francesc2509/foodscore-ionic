@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Foodscore</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-virtual-scroll [items]="restaurants">
+    <!-- <ion-item-divider color="primary" *virtualHeader="let header">
+      {{ header }}
+    </ion-item-divider> -->
+    <ion-item *virtualItem="let restaurant">
+      <ion-thumbnail slot="start">
+        <img [src]="restaurant.image">
+      </ion-thumbnail>
+      <ion-label text-wrap>
+        <h4>{{restaurant.name}}</h4>
+        <p>{{restaurant.description}}</p>
+      </ion-label>
+      <ion-button slot="end"
+        fill="clear"
+        color="dark"
+        [routerDirection]="'forward'"
+        [routerLink]="['/restaurants/detail', restaurant.id]">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button>
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

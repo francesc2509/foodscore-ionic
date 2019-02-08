@@ -1,0 +1,58 @@
+<ion-content padding>
+  <div class="h-100 d-flex column justify-content-center align-items-center">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Login</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+          <form role="form"
+          novalidate="novalidate"
+          [formGroup]="loginForm"
+          (ngSubmit)="login($event)">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="email" formControlName="email" required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password</ion-label>
+              <ion-input type="password" formControlName="password" required>
+              </ion-input>
+            </ion-item>
+          </ion-list>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" color="primary" expand="block" [disabled]="!loginForm.valid">
+                  Login
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <ion-button type="submit" color="light" expand="block">
+                    <ion-icon name="logo-google"></ion-icon>
+                    Google
+                  </ion-button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                  <ion-button type="submit" color="dark" expand="block">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                    Facebook
+                  </ion-button>
+                </ion-col>
+            </ion-row>
+          </ion-grid>
+          <p class="d-flex justify-content-center align-items-center">
+            <a [routerDirection]="'forward'" [routerLink]="'/auth/register'" expand="block">Create an account</a>
+          </p>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
