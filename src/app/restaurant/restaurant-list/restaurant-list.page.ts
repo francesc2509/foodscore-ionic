@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Restaurant } from '../models';
 import { RestaurantService } from '../services';
 import { ActivatedRoute } from '@angular/router';
 import { Show } from '../constants';
 import { of } from 'rxjs';
+import { IonVirtualScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-restaurants',
@@ -11,6 +12,7 @@ import { of } from 'rxjs';
   styleUrls: ['./restaurant-list.page.scss'],
 })
 export class RestaurantListPage implements OnInit {
+  @ViewChild('virtualScroll', { read: IonVirtualScroll }) virtualScroll: IonVirtualScroll;
 
   loading = false;
   restaurants: Restaurant[] = [];
@@ -23,7 +25,9 @@ export class RestaurantListPage implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {}
+
+  ionViewWillEnter (): void {
     const show = this.route.snapshot.data.show;
 
     let restaurants$;

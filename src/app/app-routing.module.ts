@@ -26,6 +26,11 @@ const routes: Routes = [
     loadChildren: './restaurant/restaurant.module#RestaurantModule',
     canActivate: [ LoginActivateGuard ]
   },
+  {
+    path: 'profile',
+    loadChildren: './profile/profile.module#ProfileModule',
+    canActivate: [ LoginActivateGuard ]
+  },
 ];
 
 @NgModule({

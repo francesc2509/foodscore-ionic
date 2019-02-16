@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>restaurant-location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="d-flex align-items-center justify-content-center" padding>
+  <ion-card class="hydrated">
+    <ion-card-header class="hydrated">
+      <ion-card-title role="heading" aria-level="2" class="d-flex row align-items-center hydrated">
+        {{position.address}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <fs-mapbox [ngModel]="position" [enableSearch]="false"></fs-mapbox>
+    </ion-card-content>
+  </ion-card>
+</div>

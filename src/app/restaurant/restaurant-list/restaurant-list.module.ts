@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { RestaurantFilterPipe } from '../pipes';
+
+import { RestaurantCardModule } from '../restaurant-card/restaurant-card.module';
 
 import { RestaurantListPage } from './restaurant-list.page';
 
@@ -19,8 +22,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    RestaurantCardModule
   ],
-  declarations: [RestaurantListPage]
+  declarations: [RestaurantListPage, RestaurantFilterPipe]
 })
 export class RestaurantListPageModule {}

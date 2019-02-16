@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Edit profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="h-100 column d-flex justify-content-center align-items-center">
+    <ion-card>
+      <ion-card-content>
+        <ion-grid padding>
+          <ion-row>
+            <ion-col>
+              <ion-button (click)="showInfoPopover()">Edit info</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button (click)="showPasswordPopover()">Edit password</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div>
+
+
+        </div>
+        <form class="d-flex column justify-content-center"
+          [formGroup]="avatarForm"
+          padding>
+          <ion-label>Avatar</ion-label>
+          <div class="d-flex row">
+            <fs-camera-button (imageChange)="setAvatar($event)">
+            </fs-camera-button>
+            <fs-gallery-button (imageChange)="setAvatar($event)">
+            </fs-gallery-button>
+            <span class="fill-remaining-space"></span>
+            <ion-button type="submit" [disabled]="!avatarForm.valid">Edit</ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

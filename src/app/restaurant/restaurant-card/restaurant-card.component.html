@@ -1,0 +1,33 @@
+<ion-card>
+  <img class="header-img" [src]="restaurant.image" />
+  <ion-card-header class="hydrated">
+    <ion-card-subtitle role="heading" aria-level="3" class="hydrated">
+      {{restaurant.cuisine}}
+    </ion-card-subtitle>
+    <ion-card-title role="heading" aria-level="2" class="d-flex row align-items-center hydrated">
+      <a [routerDirection]="'forward'" [routerLink]="['/restaurants/detail', restaurant.id]" padding-end="0.25em">
+        {{restaurant.name}}
+      </a>
+      <ng-container [ngSwitch]="true">
+        <ion-badge *ngSwitchCase="!open" color="danger">Closed</ion-badge>
+        <ion-badge *ngSwitchCase="open" color="primary">Open</ion-badge>
+      </ng-container>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content class="card-content card-content-ios hydrated">
+    <p>{{restaurant.description}}</p>
+    <p>{{getDaysString(restaurant)}}</p>
+    <div>
+      <fs-rating-stars [ngModel]="restaurant.stars" [disabled]="true"></fs-rating-stars>
+    </div>
+    <p>{{restaurant.distance | number:'1.1-2'}} Km</p>
+    <div *ngIf="restaurant.mine">
+      <ion-button [routerLink]="['/restaurants/edit', restaurant.id]">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="deleteRestaurant()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

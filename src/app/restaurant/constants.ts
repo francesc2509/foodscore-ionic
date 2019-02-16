@@ -3,3 +3,5 @@ export enum Show {
   MINE,
   USER
 }
+
+export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

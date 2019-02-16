@@ -1,33 +1,34 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Foodscore</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
-  <ion-virtual-scroll [items]="restaurants">
-    <!-- <ion-item-divider color="primary" *virtualHeader="let header">
-      {{ header }}
-    </ion-item-divider> -->
-    <ion-item *virtualItem="let restaurant">
-      <ion-thumbnail slot="start">
-        <img [src]="restaurant.image">
-      </ion-thumbnail>
-      <ion-label text-wrap>
-        <h4>{{restaurant.name}}</h4>
-        <p>{{restaurant.description}}</p>
-      </ion-label>
-      <ion-button slot="end"
-        fill="clear"
-        color="dark"
-        [routerDirection]="'forward'"
-        [routerLink]="['/restaurants/detail', restaurant.id]">
-          <ion-icon name="arrow-round-forward"></ion-icon>
-      </ion-button>
-    </ion-item>
-  </ion-virtual-scroll>
+<ion-content>
+  <div>
+    <div class="d-flex">
+      <div class="d-flex column justify-content-center align-items-center">
+        <ion-toggle [(ngModel)]="showOpen"></ion-toggle>
+        <ion-label>Open</ion-label>
+      </div>
+      <div class="d-flex column justify-content-center align-items-center">
+        <ion-toggle [(ngModel)]="orderByName"></ion-toggle>
+        <ion-label>Name</ion-label>
+      </div>
+      <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+    </div>
+    <ion-virtual-scroll [items]="restaurants | restaurantFilter: orderByName: showOpen: search"
+      approxItemHeight="375px">
+      <div *virtualItem="let item; let itemBounds = bounds;">
+        <fs-restaurant-card [restaurant]="item" (delete)="deleteRestaurant($event)"></fs-restaurant-card>
+      </div>
+    </ion-virtual-scroll>
+  </div>
 </ion-content>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button>
+  <ion-fab-button size="small" [routerDirection]="'forward'" [routerLink]="['/restaurants/new']">
     <ion-icon name="add"></ion-icon>
   </ion-fab-button>
 </ion-fab>

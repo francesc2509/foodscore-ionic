@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="h-100" method="POST" role="form" [formGroup]="restaurantForm" (ngSubmit)="submit($event)">
+    <ion-thumbnail *ngIf="image">
+      <ion-img [src]="image"></ion-img>
+    </ion-thumbnail>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="text" formControlName="name">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-textarea formControlName="description">
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cuisine</ion-label>
+        <ion-input type="text" formControlName="cuisine">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input type="tel" formControlName="phone">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <div>
+          <ion-label text-wrap>Image</ion-label>
+          <fs-gallery-button (imageChange)="setImage($event)">
+          </fs-gallery-button>
+          <!-- <input formControlName="image" type="file" /> -->
+        </div>
+      </ion-item>
+    </ion-list>
+    <div [formGroup]="restaurantForm.get('days')" fsOneChecked padding>
+      <div margin-end>Opens</div>
+      <div class="d-flex row align-items-center">
+        <div *ngFor="let day of days; let i = index" padding-end margin-top>
+          <ion-checkbox formControlName="days{{i}}"></ion-checkbox>
+          <ion-label>{{day}}</ion-label>
+        </div>
+      </div>
+      <ion-label *ngIf="!restaurantForm.get('days').valid" color="danger">
+        You must chooose at least 1 day.
+      </ion-label>
+    </div>
+    <fs-mapbox [formGroup]="restaurantForm.get('location')"></fs-mapbox>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="primary" expand="block" [disabled]="!restaurantForm.valid">
+            {{submitBtnTxt}}
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

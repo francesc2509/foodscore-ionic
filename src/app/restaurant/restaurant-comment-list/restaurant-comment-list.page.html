@@ -1,0 +1,29 @@
+<ion-content *ngIf="comments" padding>
+  <div style="margin-top: 40px;">
+    <ion-virtual-scroll [items]="comments">
+      <ion-item *virtualItem="let comment">
+        <ion-thumbnail slot="start">
+          <img [src]="comment.user.avatar">
+        </ion-thumbnail>
+        <ion-label text-wrap>
+          <h4>{{comment.text}}</h4>
+          <p>{{comment.date | date:'MM/dd/yyyy'}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-virtual-scroll>
+  </div>
+</ion-content>
+<form *ngIf="!restaurant.commented" role="form" novalidate="novalidate" [formGroup]="commentForm"
+  (ngSubmit)="sendComment($event)">
+  <ion-list>
+    <ion-item>
+      <ion-textarea placeholder="Write a review" formControlName="text"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <fs-rating-stars formControlName="stars"></fs-rating-stars>
+    </ion-item>
+    <ion-item>
+      <ion-button color="primary" type="submit" [disabled]="!commentForm.valid">Send review</ion-button>
+    </ion-item>
+  </ion-list>
+</form>

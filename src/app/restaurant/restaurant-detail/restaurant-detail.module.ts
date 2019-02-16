@@ -10,7 +10,22 @@ import { RestaurantDetailPage } from './restaurant-detail.page';
 const routes: Routes = [
   {
     path: '',
-    component: RestaurantDetailPage
+    component: RestaurantDetailPage,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'info'},
+      {
+        path: 'info',
+        loadChildren: '../restaurant-info/restaurant-info.module#RestaurantInfoPageModule',
+      },
+      {
+        path: 'location',
+        loadChildren: '../restaurant-location/restaurant-location.module#RestaurantLocationPageModule',
+      },
+      {
+        path: 'comments',
+        loadChildren: '../restaurant-comment-list/restaurant-comment-list.module#RestaurantCommentListPageModule'
+      },
+    ]
   }
 ];
 
@@ -19,7 +34,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   declarations: [RestaurantDetailPage]
 })

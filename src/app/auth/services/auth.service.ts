@@ -49,7 +49,7 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem(TOKEN_KEY);
+        this.storage.remove(TOKEN_KEY);
 
         this.logged = false;
         this.loginChange$.emit(this.logged);

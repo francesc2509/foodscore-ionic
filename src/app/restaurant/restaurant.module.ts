@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 import { RestaurantRoutingModule } from './restaurant-routing.module';
 
@@ -8,6 +9,7 @@ import { RestaurantRoutingModule } from './restaurant-routing.module';
   imports: [
     CommonModule,
     RestaurantRoutingModule,
+    IonicModule,
   ],
 })
 export class RestaurantModule {}

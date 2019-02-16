@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'http://192.168.1.101:3000',
+  // baseUrl: 'http://192.168.0.57:3000',
+  baseUrl: 'http://arturober.com:3000',
   'token-key': 'fs-token',
   'mapbox-key': 'pk.eyJ1IjoiZnJhbmNlc2MyNTA5IiwiYSI6ImNqcHFvYXJkZTBpNzMzeG8yZHZqdHdlNDAifQ.l7q5u82bS5PA2ovxwTKlPA'
 };

@@ -1,9 +1,26 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>restaurant-detail</ion-title>
+    <ion-title>Restaurant detail</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<div>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="info">
+        <ion-label>Details</ion-label>
+        <ion-icon name="list-box"></ion-icon>
+      </ion-tab-button>
 
-</ion-content>
+      <ion-tab-button tab="location">
+        <ion-label>Location</ion-label>
+        <ion-icon name="compass"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="comments">
+        <ion-label>Opinions</ion-label>
+        <ion-icon name="chatboxes"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</div>

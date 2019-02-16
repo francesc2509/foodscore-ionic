@@ -1,5 +1,7 @@
 {
   "name": "ionic-foodscore",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

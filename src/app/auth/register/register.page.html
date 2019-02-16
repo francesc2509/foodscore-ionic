@@ -1,9 +1,70 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Create an account</ion-card-title>
+        <ion-avatar *ngIf="registerForm.get('avatar').value">
+          <img [src]="registerForm.get('avatar').value">
+        </ion-avatar>
+      </ion-card-header>
 
+      <ion-card-content>
+        <form role="form" novalidate="novalidate" [formGroup]="registerForm" (ngSubmit)="submit($event)">
+          <ion-list>
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text" formControlName="name" required>
+              </ion-input>
+            </ion-item>
+            <ng-container formGroupName="emailGroup">
+              <ion-item>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input type="email" formControlName="email" required>
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Repeat e-mail</ion-label>
+                <ion-input type="email" formControlName="email2" required>
+                </ion-input>
+              </ion-item>
+            </ng-container>
+            <ng-container formGroupName="passwordGroup">
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" formControlName="password" required>
+                </ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Repeat password</ion-label>
+                <ion-input type="password" formControlName="password2" required>
+                </ion-input>
+              </ion-item>
+            </ng-container>
+            <ion-item>
+              <div>
+                <ion-label text-wrap>Avatar</ion-label>
+                <fs-gallery-button (imageChange)="setAvatar($event)">
+                </fs-gallery-button>
+                <fs-camera-button (imageChange)="setAvatar($event)">
+                </fs-camera-button>
+              </div>
+            </ion-item>
+          </ion-list>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" color="primary" expand="block" [disabled]="!registerForm.valid">
+                  Register
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <p class="d-flex justify-content-center align-items-center">
+            <a [routerDirection]="'back'" [routerLink]="'/auth/login'" expand="block">Have an account?</a>
+          </p>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

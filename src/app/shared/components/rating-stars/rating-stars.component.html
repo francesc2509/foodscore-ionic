@@ -1,0 +1,8 @@
+<span [ngClass]="{'disabled': disabled}">
+    <ion-icon *ngFor="let star of fullStars; let i = index;"
+        (click)="starClickHandler(fullStars.length - (fullStars.length - i - 1))"
+        name="star"></ion-icon>
+    <ion-icon *ngFor="let star of emptyStars; let i = index;"
+        (click)="starClickHandler((stars - emptyStars.length) + i + 1)"
+        name="star-outline"></ion-icon>
+</span>
