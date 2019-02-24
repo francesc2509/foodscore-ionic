@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Restaurant } from '../models';
 import { RestaurantStateService } from '../services';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator/ngx';
 
 @Component({
   selector: 'app-restaurant-location',
@@ -11,7 +12,10 @@ export class RestaurantLocationPage implements OnInit {
   private restaurant: Restaurant;
   position: { address: string, coords: Coordinates };
 
-  constructor(private stateService: RestaurantStateService) { }
+  constructor(
+    private stateService: RestaurantStateService,
+    private launchNavigator: LaunchNavigator
+  ) { }
 
   ngOnInit() {
     this.stateService.getRestaurant().subscribe(
@@ -31,4 +35,10 @@ export class RestaurantLocationPage implements OnInit {
     );
   }
 
+  async navigate() {
+    const options: LaunchNavigatorOptions = {};
+    const lat = this.position.coords.latitude;
+    const lng = this.position.coords.longitude;
+    await this.launchNavigator.navigate([lat, lng], options);
+  }
 }

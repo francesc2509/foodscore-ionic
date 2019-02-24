@@ -17,26 +17,36 @@
         <ion-label position="floating">Name</ion-label>
         <ion-input type="text" formControlName="name">
         </ion-input>
+        <ion-icon name="checkmark-circle" slot="end"
+          [color]="restaurantForm.get('name').valid ? 'success': 'danger'"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
+        <ion-label position="floating">Description</ion-label>
         <ion-textarea formControlName="description">
         </ion-textarea>
+        <ion-icon name="checkmark-circle" slot="end"
+          [color]="restaurantForm.get('description').valid ? 'success': 'danger'"></ion-icon>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Cuisine</ion-label>
         <ion-input type="text" formControlName="cuisine">
         </ion-input>
+        <ion-icon name="checkmark-circle" slot="end"
+          [color]="restaurantForm.get('cuisine').valid ? 'success': 'danger'"></ion-icon>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Phone</ion-label>
         <ion-input type="tel" formControlName="phone">
         </ion-input>
+        <ion-icon name="checkmark-circle" slot="end"
+          [color]="restaurantForm.get('phone').valid ? 'success': 'danger'"></ion-icon>
       </ion-item>
       <ion-item>
         <div>
           <ion-label text-wrap>Image</ion-label>
+          <fs-gallery-button (imageChange)="setImage($event)">
+          </fs-gallery-button>
           <fs-gallery-button (imageChange)="setImage($event)">
           </fs-gallery-button>
           <!-- <input formControlName="image" type="file" /> -->

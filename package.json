@@ -22,25 +22,34 @@
     "@angular/router": "^7.2.2",
     "@ionic-native/camera": "^5.0.0",
     "@ionic-native/core": "^5.0.0",
-    "@ionic-native/geolocation": "^5.0.0",
+    "@ionic-native/facebook": "^5.2.0",
+    "@ionic-native/geolocation": "^5.1.0",
+    "@ionic-native/google-plus": "^5.2.0",
+    "@ionic-native/launch-navigator": "^5.1.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.0.0",
     "@ionic/storage": "^2.2.0",
     "cordova-android": "7.1.4",
+    "cordova-plugin-actionsheet": "2.3.3",
     "cordova-plugin-camera": "4.0.3",
     "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-dialogs": "2.0.1",
+    "cordova-plugin-facebook4": "4.2.1",
     "cordova-plugin-geolocation": "4.0.1",
+    "cordova-plugin-googleplus": "7.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.3",
     "cordova-plugin-ionic-webview": "^3.1.2",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-telerik-imagepicker": "2.2.3",
     "cordova-plugin-whitelist": "^1.3.3",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "mapbox-gl": "^0.53.0",
     "ngx-mapbox-gl": "^3.0.1",
     "rxjs": "~6.3.3",
+    "uk.co.workingedge.phonegap.plugin.launchnavigator": "5.0.4",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
@@ -85,7 +94,25 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-geolocation": {}
+      "cordova-plugin-geolocation": {},
+      "uk.co.workingedge.phonegap.plugin.launchnavigator": {
+        "GOOGLE_API_KEY_FOR_ANDROID": "AIzaSyBOsD1guCZbuq-owCb6iCzjqLJSi6rLNiM",
+        "OKHTTP_VERSION": "3.12.0"
+      },
+      "cordova-plugin-telerik-imagepicker": {
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "choose favourite photos"
+      },
+      "cordova-plugin-facebook4": {
+        "APP_ID": "2908014832542778",
+        "APP_NAME": "Ionic Native",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "4.40.0"
+      },
+      "cordova-plugin-googleplus": {
+        "REVERSED_CLIENT_ID": "com.apps.googleusercontent.3493852405-ti893j7r6btjff3ohh1i1q3aiubar41g",
+        "WEB_APPLICATION_CLIENT_ID": "3493852405-i42aed10i54blfjpt7l42i5rtilkpl0j.apps.googleusercontent.com",
+        "PLAY_SERVICES_VERSION": "11.8.0"
+      }
     },
     "platforms": [
       "android"

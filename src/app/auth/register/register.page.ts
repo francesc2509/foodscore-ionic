@@ -60,7 +60,7 @@ export class RegisterPage implements OnInit {
 
       this.service.register(user).subscribe(
         data => {
-          this.router.navigateBack(['/auth/login']);
+          this.router.navigateRoot(['/auth/login']);
         },
         err => console.log(err)
       );

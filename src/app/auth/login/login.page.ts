@@ -3,9 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-import { Observable } from 'rxjs';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
+
+import { Observable, from, of } from 'rxjs';
 
 import { AuthService } from '../services';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -16,12 +20,15 @@ import { AuthService } from '../services';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
+  response;
   error: any;
 
   constructor(
     private authService: AuthService,
     private router: NavController,
     private fb: FormBuilder,
+    private facebook: Facebook,
+    public gplus: GooglePlus,
     private ngZone: NgZone,
   ) { }
 
@@ -43,24 +50,48 @@ export class LoginPage implements OnInit {
     }
   }
 
-  loggedGoogle(user: gapi.auth2.GoogleUser) {
+  loggedGoogle(/*user: gapi.auth2.GoogleUser*/) {
     // Send this token to your server for register / login
-    console.log(user.getAuthResponse().id_token);
     this.ngZone.run(() => {
-      //   const name = user.getBasicProfile().getName();
-      //   const email = user.getBasicProfile().getEmail();
-      //   const avatar = user.getBasicProfile().getImageUrl();
-      this.subscribe(this.authService.googleLogin(user.getAuthResponse().id_token));
+        const login$ = from(this.gplus.login(
+          {'webClientId': '3493852405-i42aed10i54blfjpt7l42i5rtilkpl0j.apps.googleusercontent.com'})
+        ).pipe(
+          switchMap((res: any) => {
+            const token = res.idToken;
+            if (!token) {
+              throw new Error('No token');
+            }
+
+            // return of(res);
+            return this.authService.googleLogin(token);
+          })
+        );
+        // login$.subscribe(
+        //   res => console.log(res)
+        // );
+        this.subscribe(login$);
     });
   }
 
-  loggedFacebook(res: FB.LoginStatusResponse) {
+  loggedFacebook() {
+    const login$ = from(this.facebook.login(['public_profile', 'email'])).pipe(
+      switchMap(res => {
+        if (res.status === 'connected') {
+          return this.authService.facebookLogin(res.authResponse.accessToken);
+        }
+        throw new Error('Login error');
+      })
+    );
+
     this.ngZone.run(() => {
-      this.subscribe(this.authService.facebookLogin(res.authResponse.accessToken));
+      this.subscribe(login$);
     });
   }
 
   private subscribe(o$: Observable<void>) {
+
+    this.error = undefined;
+
     o$.subscribe(
       (res) => {
         this.router.navigateRoot(['/restaurants']);

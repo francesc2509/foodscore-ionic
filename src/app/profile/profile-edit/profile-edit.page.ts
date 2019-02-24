@@ -54,6 +54,27 @@ export class ProfileEditPage implements OnInit {
     this.avatarForm.get('avatar').setValue(event);
   }
 
+  editAvatar(event) {
+    const avatar = this.avatarForm.get('avatar').value;
+    const user = <User>{ avatar };
+
+    this.service.updateAvatar(user).subscribe(
+      data => {
+        this.user.avatar = data.avatar;
+        this.avatarForm.get('avatar').setValue('');
+        this.messages.avatar = { ok: true, text: 'Avatar updated successfully' };
+      },
+      err => {
+        this.messages.avatar = {
+          ok: false,
+          text: err.message
+        };
+      }
+    );
+
+    event.preventDefault();
+  }
+
   private async showPopover(component, params) {
     const popover = await this.popoverCtrl.create({
       component: component,
@@ -94,7 +115,7 @@ export class EditInfoComponent implements OnInit {
     private popoverCtrl: PopoverController,
     private fb: FormBuilder,
     private service: ProfileService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.infoForm = this.fb.group({
@@ -180,7 +201,7 @@ export class EditPasswordComponent implements OnInit {
     private popoverCtrl: PopoverController,
     private fb: FormBuilder,
     private service: ProfileService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.passwordForm = this.fb.group({

@@ -35,27 +35,6 @@ export class RestaurantCardComponent implements OnInit {
     }
 
     deleteRestaurant() {
-        // const modalRef = this.dialog.open(ModalConfirmComponent, {
-        //     data: {
-        //         title: 'This action cannot be reverted',
-        //         body: `Do you want to remove the restaurant called ${this.restaurant.name}?`
-        //     },
-        //     disableClose: true
-        // });
-
-        // modalRef.afterClosed().subscribe(
-        //     result => {
-        //         if (result) {
-        //             this.service.deleteRestaurant(this.restaurant.id).subscribe(
-        //                 () => this.delete.emit(this.restaurant),
-        //                 err => alert(err)
-        //             );
-        //         }
-        //     },
-        //     err => {
-        //         console.log(err);
-        //     }
-        // );
         this.presentAlert();
     }
 
@@ -65,8 +44,8 @@ export class RestaurantCardComponent implements OnInit {
 
     private async presentAlert() {
         const alert = await this.alertController.create({
-            header: 'Confirm!',
-            message: 'Message <strong>text</strong>!!!',
+            header: 'Delete restaurant',
+            message: `Do you want to delete the restaurant indentified by id = ${this.restaurant.id} ?`,
             buttons: [
                 {
                     text: 'Cancel',

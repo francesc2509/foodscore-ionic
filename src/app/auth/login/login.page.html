@@ -33,7 +33,7 @@
             </ion-row>
             <ion-row>
                 <ion-col>
-                  <ion-button type="submit" color="light" expand="block">
+                  <ion-button type="submit" color="light" expand="block" (click)="loggedGoogle()">
                     <ion-icon name="logo-google"></ion-icon>
                     Google
                   </ion-button>
@@ -41,13 +41,23 @@
             </ion-row>
             <ion-row>
                 <ion-col>
-                  <ion-button type="submit" color="dark" expand="block">
+                  <ion-button type="submit" color="dark" expand="block"
+                    (click)="loggedFacebook()">
                     <ion-icon name="logo-facebook"></ion-icon>
                     Facebook
                   </ion-button>
                 </ion-col>
             </ion-row>
           </ion-grid>
+
+          <p *ngIf="error">
+            <ion-label color="danger">Login incorrect</ion-label>
+          </p>
+
+          <p *ngIf="response">
+            {{response | json}}
+          </p>
+
           <p class="d-flex justify-content-center align-items-center">
             <a [routerDirection]="'forward'" [routerLink]="'/auth/register'" expand="block">Create an account</a>
           </p>

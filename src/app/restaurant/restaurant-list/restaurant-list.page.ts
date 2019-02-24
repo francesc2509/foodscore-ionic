@@ -3,8 +3,9 @@ import { Restaurant } from '../models';
 import { RestaurantService } from '../services';
 import { ActivatedRoute } from '@angular/router';
 import { Show } from '../constants';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { IonVirtualScroll } from '@ionic/angular';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-restaurants',
@@ -15,6 +16,7 @@ export class RestaurantListPage implements OnInit {
   @ViewChild('virtualScroll', { read: IonVirtualScroll }) virtualScroll: IonVirtualScroll;
 
   loading = false;
+  restaurants$: Observable<Restaurant[]>;
   restaurants: Restaurant[] = [];
   orderByName = false;
   showOpen = false;
@@ -25,18 +27,15 @@ export class RestaurantListPage implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {}
-
-  ionViewWillEnter (): void {
+  ngOnInit() {
     const show = this.route.snapshot.data.show;
 
-    let restaurants$;
     switch (show) {
       case Show.ALL:
-        restaurants$ = this.service.getAll();
+        this.restaurants$ = this.service.getAll();
         break;
       case Show.MINE:
-        restaurants$ = this.service.getMine();
+        this.restaurants$ = this.service.getMine();
         break;
       case Show.USER:
         const id = Math.floor(Number(this.route.snapshot.params['id']));
@@ -44,25 +43,37 @@ export class RestaurantListPage implements OnInit {
         if (isNaN(id) || id < 1) {
           throw new Error(`'Id' must be a positive number`);
         }
-        restaurants$ = this.service.getByUser(id);
+        this.restaurants$ = this.service.getByUser(id);
         break;
       default:
-        restaurants$ = of([]);
+        this.restaurants$ = of([]);
         break;
     }
+    this.refresh();
+   }
 
+  ionViewWillEnter(): void {
+    // this.refresh();
+  }
+
+  refresh(event?) {
     this.loading = true;
-    restaurants$.subscribe(
-      res => {
+    this.restaurants$.pipe(
+      map(res => {
         this.restaurants = res;
-      },
-      err => {
-        this.loading = false;
+      }),
+      catchError(err => {
         console.log(err);
-      },
+        return of();
+      })
+    ).subscribe(
       () => {
         this.loading = false;
-      }
+
+        if (event) {
+          event.target.complete();
+        }
+      },
     );
   }
 
